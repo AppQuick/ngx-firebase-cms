@@ -4,6 +4,9 @@ NGX-FIREBASE-CMS
 
 <div align="center">
 🛑🛑UNDER DEVELOPMENT 🛑🛑
+</div>
+
+<div align="center">
 🛑 DONT USE 🛑
 </div>
 
