@@ -38,8 +38,4 @@ Angular Content Management System using Google Firebase (Authentication, Storage
 - coming soon
 
 ## License
-<<<<<<< HEAD
 - GNU GPLv3
-=======
-- GNU GPLv3
->>>>>>> 0b67300a34bf366dc2ed580c0a4258cbcf0da1d6
