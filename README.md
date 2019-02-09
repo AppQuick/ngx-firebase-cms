@@ -12,10 +12,12 @@ NGX-FIREBASE-CMS
 
 <div align="center">
 Angular Content Management System using Google Firebase (Authentication, Storage &amp; Firestore)
+
 [![GitHub Release Date](https://img.shields.io/github/release-date/AppQuick/ngx-firebase-cms.svg?style=flat-square)](https://github.com/AppQuick/ngx-firebase-cms/releases)
 [![npm package](https://img.shields.io/npm/v/ngx-firebase-cms.svg?style=flat-square)](https://www.npmjs.org/package/ngx-firebase-cms)
 [![NPM downloads](http://img.shields.io/npm/dm/ngx-firebase-cms.svg?style=flat-square)](https://npmjs.org/package/ngx-firebase-cms)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/AppQuick/ngx-firebase-cms/blob/master/LICENSE)
+
 </div>
 
 ## Description
