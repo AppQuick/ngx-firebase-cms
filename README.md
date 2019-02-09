@@ -1,8 +1,11 @@
 <h1 align="center">
 NGX-FIREBASE-CMS 
 </h1>
-** UNDER DEVELOPMENT **
-** DONT USE **
+
+<div align="center">
+🛑🛑UNDER DEVELOPMENT 🛑🛑
+🛑 DONT USE 🛑
+</div>
 
 <div align="center">
 Angular Content Management System using Google Firebase (Authentication, Storage &amp; Firestore)
