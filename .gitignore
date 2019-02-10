@@ -45,5 +45,5 @@ Thumbs.db
 
 
 # Remove the firebase config
-ngx-firebase-cms/projects/ngx-firebase-cms-tester/src/environments/environment.ts
-ngx-firebase-cms/projects/ngx-firebase-cms-tester/src/environments/environment.prod.ts
+projects/ngx-firebase-cms-tester/src/environments/environment.ts
+projects/ngx-firebase-cms-tester/src/environments/environment.prod.ts
