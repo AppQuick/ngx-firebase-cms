@@ -50,15 +50,16 @@ Open `/src/environments/environment.ts` and add your Firebase configuration. You
 ```
 export const environment = {
   production: false,
+  firebase: {
+    apiKey: '<your-key>',
+    authDomain: '<your-project-authdomain>',
+    databaseURL: '<your-database-URL>',
+    projectId: '<your-project-id>',
+    storageBucket: '<your-storage-bucket>',
+    messagingSenderId: '<your-messaging-sender-id>'
+  },
   ngxFirebaseCms: {
-    firebase: {
-        apiKey: '<your-key>',
-        authDomain: '<your-project-authdomain>',
-        databaseURL: '<your-database-URL>',
-        projectId: '<your-project-id>',
-        storageBucket: '<your-storage-bucket>',
-        messagingSenderId: '<your-messaging-sender-id>'
-    }
+    
   }
 };
 ```
@@ -68,13 +69,15 @@ Open `/src/app/app.module.ts`, inject the NgxFirebaseCms providers, and specify 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { NgxFirebaseCms } from 'ngx-firebase-cms';
+import { AngularFireModule } from '@angular/fire';
+import { NgxFirebaseCmsModule } from 'ngx-firebase-cms';
 import { environment } from '../environments/environment';
 
 @NgModule({
   imports: [
     BrowserModule,
-    NgxFirebaseCms.forRoot(environment.ngxFirebaseCms)
+    AngularFireModule.initializeApp(environment.firebase),
+    NgxFirebaseCmsModule.forRoot(environment.ngxFirebaseCms)
   ],
   declarations: [ AppComponent ],
   bootstrap: [ AppComponent ]
