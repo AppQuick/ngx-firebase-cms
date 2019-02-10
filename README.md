@@ -1,5 +1,5 @@
 <h1 align="center">
-NGX-FIREBASE-CMS 
+NGX-FIREBASE-CMS
 </h1>
 
 <div align="center">
@@ -34,7 +34,62 @@ Angular Content Management System using Google Firebase (Authentication, Storage
 - Modern browsers and Internet Explorer 11+ (with [polyfills](https://angular.io/guide/browser-support))
 
 ## Installation
-- coming soon
+### 1. Create a new project
+```
+ng new <project-name>
+cd <project-name>
+```
+
+### 2. Install NGX-FIREBASE-CMS
+```
+npm i -S ngx-firebase-cms
+```
+
+### 3. Add Firebase config to environments variable
+Open `/src/environments/environment.ts` and add your Firebase configuration. You can find your project configuration in the [Firebase Console](https://console.firebase.google.com/). From the project overview page, click Add Firebase to your web app.
+```
+export const environment = {
+  production: false,
+  ngxFirebaseCms: {
+    firebase: {
+        apiKey: '<your-key>',
+        authDomain: '<your-project-authdomain>',
+        databaseURL: '<your-database-URL>',
+        projectId: '<your-project-id>',
+        storageBucket: '<your-storage-bucket>',
+        messagingSenderId: '<your-messaging-sender-id>'
+    }
+  }
+};
+```
+### 4. Setup @NgModule for the NgxFirebaseCmsModule
+Open `/src/app/app.module.ts`, inject the NgxFirebaseCms providers, and specify your NgxFirebaseCms configuration.
+```
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { AppComponent } from './app.component';
+import { NgxFirebaseCms } from 'ngx-firebase-cms';
+import { environment } from '../environments/environment';
+
+@NgModule({
+  imports: [
+    BrowserModule,
+    NgxFirebaseCms.forRoot(environment.ngxFirebaseCms)
+  ],
+  declarations: [ AppComponent ],
+  bootstrap: [ AppComponent ]
+})
+export class AppModule {}
+```
+
+### 5. Run your app
+```
+ng serve
+```
+Run the serve command and navigate to localhost:4200 in your browser.
+
+### 6. Next step
+Next Step: [Documents](#)
 
 ## Usage
 - coming soon
