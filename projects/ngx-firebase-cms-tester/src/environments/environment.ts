@@ -6,12 +6,12 @@ export const environment = {
   production: false,
   ngxFirebaseCms : {
     firebase: {
-      apiKey: "xxxxx",
-      authDomain: "xxxxx",
-      databaseURL: "xxxxx",
-      projectId: "xxxxx",
-      storageBucket: "xxxxx",
-      messagingSenderId: "xxxxx"
+      apiKey: "xxxxxx",
+      authDomain: "xxxxxx",
+      databaseURL: "xxxxxx",
+      projectId: "xxxxxx",
+      storageBucket: "xxxxxx",
+      messagingSenderId: "xxxxxx"
     }
   }
 }
