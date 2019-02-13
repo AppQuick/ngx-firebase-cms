@@ -36,7 +36,7 @@ Angular Content Management System using Google Firebase (Authentication, Storage
 ## Installation
 ### 1. Create a new project
 ```
-ng new <project-name>
+ng new <project-name> --routing
 cd <project-name>
 ```
 
@@ -64,20 +64,25 @@ export const environment = {
 };
 ```
 ### 4. Setup @NgModule for the NgxFirebaseCmsModule
-Open `/src/app/app.module.ts`, inject the NgxFirebaseCms providers, and specify your NgxFirebaseCms configuration.
+Open `/src/app/app.module.ts`, inject the NgxFirebaseCms and BrowserAnimationsModule providers, and specify your NgxFirebaseCms configuration.
 ```
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire';
 import { NgxFirebaseCmsModule } from 'ngx-firebase-cms';
 import { environment } from '../environments/environment';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+...
 
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
     NgxFirebaseCmsModule.forRoot(environment.ngxFirebaseCms)
+    ...
   ],
   declarations: [ AppComponent ],
   bootstrap: [ AppComponent ]
@@ -85,13 +90,56 @@ import { environment } from '../environments/environment';
 export class AppModule {}
 ```
 
-### 5. Run your app
+### 5. Enable Email/Password Authenication Provider
+Open `console.firebase.google.com` and go to `Develop > Authentication > Sign-in method`
+
+### 6. Amend the Rules for firestore
+Open `console.firebase.google.com` and go to `Develop > Database > Cloud Firestore > Rules`
+Temporarily, allow read/write access on all documents to any user signed in to the application
+```
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if request.auth.uid != null
+    }
+  }
+}
+```
+> This is temporary settings, it is not safe as everyone could register to be a user using any email.
+
+### 7. Add ngx-firebase-cms Admin Panel to route module
+Open `app-routing.module.ts` and add the `NgxFirebaseCmsModule`
+
+```
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { NgxFirebaseCmsModule } from 'ngx-firebase-cms';
+
+const routes: Routes = [
+  { path: 'admin', loadChildren: () => NgxFirebaseCmsModule },
+  /***
+    Your other routes
+  ***/
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+```
+> The Admin Panel is now at `localhost:4200/admin` or you could change the `admin` to any other url
+> You should consider to add `https` cert for production use.
+
+### 8. Run your app
 ```
 ng serve
 ```
-Run the serve command and navigate to localhost:4200 in your browser.
+Run the serve command and navigate to `http://localhost:4200` in your browser.
+The default route for Admin Panel is at `http://localhost:4200/admin`
 
-### 6. Next step
+### 9. Next step
 Next Step: [Documents](#)
 
 ## Usage

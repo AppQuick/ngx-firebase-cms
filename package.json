@@ -1,6 +1,6 @@
 {
   "name": "ngx-firebase-cms",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve ngx-firebase-cms-tester",
