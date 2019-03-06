@@ -1,0 +1,15 @@
+body {
+    margin: 0;
+}
+
+.ant-layout {
+    min-height: 100vh;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.footer {
+    margin: 0;
+}
