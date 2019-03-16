@@ -1,0 +1,19 @@
+<h1>
+  {{ title }}
+  <ng-template ngFor let-button [ngForOf]="buttons">
+    <button nz-tooltip [nzTitle]="button.tooltip ||  button.title" class="m-r-10" (click)="button.fn()" nz-button
+      nzType="default">
+      <i *ngIf="button.icon" nz-icon [type]="button.icon"></i> {{ button.title }}
+      <span *ngIf="button.shortcut" class="shortcut">{{ button.shortcut }}</span>
+    </button>
+  </ng-template>
+
+  <ng-template ngFor let-button [ngForOf]="uploadButtons">
+    <nz-upload [nzCustomRequest]="button.fn" [nzShowUploadList]="false">
+      <button nz-button #uploadBtn nzType="danger">
+        <i *ngIf="button.icon" nz-icon [type]="button.icon"></i> {{ button.title }}
+        <span *ngIf="button.shortcut" class="shortcut">{{ button.shortcut }}</span>
+      </button>
+    </nz-upload>
+  </ng-template>
+</h1>

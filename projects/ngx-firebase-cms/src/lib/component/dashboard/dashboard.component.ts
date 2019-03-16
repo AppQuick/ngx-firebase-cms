@@ -5,7 +5,7 @@ import { User } from '../../interface/user';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
-import { NzMessageService } from 'ng-zorro-antd';
+import { NzMessageService, NzI18nService, en_US } from 'ng-zorro-antd';
 
 @Component({
   selector: 'cms-dashboard',
@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
   brand = ""
   brandURL = "#"
 
-  isCollapsed = true;
+  isCollapsed = false;
   isReverseArrow = false;
   width = 200;
   user: User
@@ -48,8 +48,10 @@ export class DashboardComponent implements OnInit {
     private afs: AngularFirestore,
     private router: Router,
     private auth: AuthService,
+    private i18n: NzI18nService,
     private message: NzMessageService
   ) {
+    this.i18n.setLocale(en_US);
     this.brand = this.config.brand || "AppQuick.co"
     this.brandURL = this.config.brandURL || "https://appquick.co"
   }

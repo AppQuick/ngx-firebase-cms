@@ -5,8 +5,10 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { LoginComponent } from './component/login/login.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireFunctionsModule, FunctionsRegionToken } from '@angular/fire/functions';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { NgZorroAntdModule, NZ_ICON_DEFAULT_TWOTONE_COLOR, NZ_ICONS, NZ_I18N, en_US } from 'ng-zorro-antd';
+import { NgZorroAntdModule, NZ_ICON_DEFAULT_TWOTONE_COLOR, NZ_ICONS, NZ_I18N, en_US, NZ_NOTIFICATION_CONFIG } from 'ng-zorro-antd';
 import { registerLocaleData, CommonModule } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { NgxFirebaseCmsRoutingModule } from './ngx-firebase-cms-routing.module';
@@ -33,6 +35,9 @@ import { AuthService } from './service/auth.service';
 import { AuthGuard } from './guard/auth.guard';
 import { UnauthGuard } from './guard/unauth.guard';
 import { HttpClientModule } from '@angular/common/http';
+import { TitleBarComponent } from './shared/title-bar/title-bar.component';
+import { BreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
+import { TableComponent } from './shared/table/table.component';
 
 const icons: IconDefinition[] = [ UserOutline, LockOutline, IdcardOutline, TeamOutline, FormOutline, SettingOutline, DesktopOutline, UnlockOutline, HddOutline, PictureOutline, MailOutline, ContactsOutline ];
 
@@ -56,26 +61,33 @@ registerLocaleData(en);
     ProfileComponent, 
     SignupComponent, 
     UserComponent, 
-    UsersComponent
+    UsersComponent, 
+    TitleBarComponent, 
+    BreadcrumbComponent, 
+    TableComponent
   ],
   imports: [
     CommonModule,
     OverlayModule,
     HttpClientModule,
     AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
+    AngularFireFunctionsModule,
     FormsModule,
     ReactiveFormsModule,
     NgxFirebaseCmsRoutingModule,
-    AngularFirestoreModule,
-    AngularFireStorageModule,
     NgZorroAntdModule
   ],
   providers: [
+    { provide: NZ_I18N, useValue: en_US },
     ExcelService,
     AuthService,
     AuthGuard,
     UnauthGuard,
-    { provide: NZ_I18N, useValue: en_US },
+    { provide: FunctionsRegionToken, useValue: 'us-central1' },
+    { provide: NZ_NOTIFICATION_CONFIG, useValue: { nzPlacement: "bottomRight" }},
     { provide: NZ_ICON_DEFAULT_TWOTONE_COLOR, useValue: '#00ff00' },
     { provide: NZ_ICONS, useValue: icons }
   ],

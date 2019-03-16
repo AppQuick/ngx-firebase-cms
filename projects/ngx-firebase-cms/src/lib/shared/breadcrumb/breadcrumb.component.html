@@ -1,0 +1,12 @@
+<nz-breadcrumb>
+  <nz-breadcrumb-item>
+    <a (click)="urlService.goTo(config.brandURL || 'https://appquick.co')">{{ config.brand || 'AppQuick.co' }}</a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item>
+    <a routerLink="../dashboard">Dashboard</a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item *ngFor="let item of items">
+    <a *ngIf="item.route" [routerLink]="item.route">{{ item.label }}</a>
+    <a *ngIf="!item.route">{{ item.label }}</a>
+  </nz-breadcrumb-item>
+</nz-breadcrumb>

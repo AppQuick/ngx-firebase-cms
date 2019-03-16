@@ -13,3 +13,11 @@ body {
 .footer {
     margin: 0;
 }
+
+.content-padding {
+    padding: 20px;
+}
+
+.ant-menu-item {
+    outline: 0;
+}

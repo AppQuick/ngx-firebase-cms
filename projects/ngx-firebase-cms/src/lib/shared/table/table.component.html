@@ -1,0 +1,14 @@
+<nz-table #basicTable [nzData]="displayData" class="table">
+  <thead>
+    <tr>
+      <th *ngFor="let header of header">{{ header?.label }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-template ngFor let-data [ngForOf]="basicTable.data">
+      <tr>
+        <td *ngFor="let header of header"></td>
+      </tr>
+    </ng-template>
+  </tbody>
+</nz-table>

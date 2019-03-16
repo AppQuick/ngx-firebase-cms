@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { NgxFirebaseCMSModule } from 'projects/ngx-firebase-cms/src/public-api';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
-import { OverlayModule } from "@angular/cdk/overlay";
+import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 @NgModule({
   declarations: [
@@ -18,8 +18,8 @@ import { OverlayModule } from "@angular/cdk/overlay";
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    OverlayModule,
     AppRoutingModule,
+    NgZorroAntdModule,
     AngularFireModule.initializeApp(environment.firebase),
     NgxFirebaseCMSModule.forRoot(environment.ngxFirebaseCms)
   ],
