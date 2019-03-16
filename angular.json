@@ -2,5 +2,175 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "ngxFirebaseCMS": {
+      "root": "projects/ngx-firebase-cms",
+      "sourceRoot": "projects/ngx-firebase-cms/src",
+      "projectType": "library",
+      "prefix": "cms",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-firebase-cms/tsconfig.lib.json",
+            "project": "projects/ngx-firebase-cms/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-firebase-cms/src/test.ts",
+            "tsConfig": "projects/ngx-firebase-cms/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-firebase-cms/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-firebase-cms/tsconfig.lib.json",
+              "projects/ngx-firebase-cms/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ngxFirebaseCMSTester": {
+      "root": "projects/ngxFirebaseCMSTester/",
+      "sourceRoot": "projects/ngxFirebaseCMSTester/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ngxFirebaseCMSTester",
+            "index": "projects/ngxFirebaseCMSTester/src/index.html",
+            "main": "projects/ngxFirebaseCMSTester/src/main.ts",
+            "polyfills": "projects/ngxFirebaseCMSTester/src/polyfills.ts",
+            "tsConfig": "projects/ngxFirebaseCMSTester/tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              },
+              "projects/ngxFirebaseCMSTester/src/favicon.ico",
+              "projects/ngxFirebaseCMSTester/src/assets"
+            ],
+            "styles": [
+              "projects/ngxFirebaseCMSTester/src/styles.css"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ngxFirebaseCMSTester/src/environments/environment.ts",
+                  "with": "projects/ngxFirebaseCMSTester/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ngxFirebaseCMSTester:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ngxFirebaseCMSTester:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ngxFirebaseCMSTester:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngxFirebaseCMSTester/src/test.ts",
+            "polyfills": "projects/ngxFirebaseCMSTester/src/polyfills.ts",
+            "tsConfig": "projects/ngxFirebaseCMSTester/tsconfig.spec.json",
+            "karmaConfig": "projects/ngxFirebaseCMSTester/karma.conf.js",
+            "styles": [
+              "projects/ngxFirebaseCMSTester/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/ngxFirebaseCMSTester/src/favicon.ico",
+              "projects/ngxFirebaseCMSTester/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngxFirebaseCMSTester/tsconfig.app.json",
+              "projects/ngxFirebaseCMSTester/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ngxFirebaseCMSTester-e2e": {
+      "root": "projects/ngxFirebaseCMSTester-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ngxFirebaseCMSTester-e2e/protractor.conf.js",
+            "devServerTarget": "ngxFirebaseCMSTester:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ngxFirebaseCMSTester:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/ngxFirebaseCMSTester-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "ngxFirebaseCMS"
 }

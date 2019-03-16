@@ -1,0 +1,33 @@
+{
+  "name": "ngx-firebase-cms",
+  "version": "0.1.1",
+  "description": "Angular Content Management System using Google Firebase (Authentication, Storage & Firestore)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AppQuick/ngx-firebase-cms"
+  },
+  "keywords": [
+    "angular",
+    "ngx",
+    "firebase",
+    "firebase-database",
+    "firebase-auth",
+    "firebase-storage",
+    "cms",
+    "ng-zorro-antd",
+    "wordpress"
+  ],
+  "author": "AppQuick.co",
+  "license": "GNU GPLv3",
+  "bugs": {
+    "url": "https://github.com/AppQuick/ngx-firebase-cms/issues"
+  },
+  "homepage": "https://github.com/AppQuick/ngx-firebase-cms",
+  "peerDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0",
+    "@angular/fire": "^5.1.2",
+    "firebase": "^5.9.0",
+    "ng-zorro-antd": "^7.0.3"
+  }
+}

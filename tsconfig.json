@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngx-firebase-cms": [
+        "dist/ngx-firebase-cms"
+      ],
+      "ngx-firebase-cms/*": [
+        "dist/ngx-firebase-cms/*"
+      ]
+    }
   }
 }

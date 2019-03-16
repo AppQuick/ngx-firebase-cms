@@ -1,0 +1,76 @@
+<nz-layout>
+    <nz-sider *ngIf="user" [@enterAnimation] nzCollapsible [(nzCollapsed)]="isCollapsed" [nzWidth]="width"
+        [nzReverseArrow]="isReverseArrow">
+        <div nz-tooltip="Dashboard" routerLink="dashboard" class="logo pointer"></div>
+        <ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
+            <li nz-submenu nzOpen="true">
+                <span title>
+                    <i nz-icon type="form"></i>
+                    <span class="nav-text">Content</span>
+                </span>
+                <ul>
+                    <li nz-menu-item routerLink="posts">
+                        <span>
+                            <i nz-icon type="form" theme="outline"></i>
+                            <span class="nav-text">Pages</span>
+                        </span>
+                    </li>
+                    <li nz-menu-item routerLink="files">
+                        <span>
+                            <i nz-icon type="picture" theme="outline"></i>
+                            <span class="nav-text">Media</span>
+                        </span>
+                    </li>
+                    <li nz-menu-item routerLink="forms">
+                        <span>
+                            <i nz-icon type="hdd" theme="outline"></i>
+                            <span class="nav-text">Form</span>
+                        </span>
+                    </li>
+                    <li nz-menu-item routerLink="emails">
+                        <span>
+                            <i nz-icon type="mail" theme="outline"></i>
+                            <span class="nav-text">Emails</span>
+                        </span>
+                    </li>
+                </ul>
+            </li>
+            <li nz-submenu nzOpen="true">
+                <span title>
+                    <i nz-icon type="setting"></i>
+                    <span class="nav-text">Setting</span>
+                </span>
+                <ul>
+                    <li nz-menu-item routerLink="profile">
+                        <span>
+                            <i nz-icon type="contacts" theme="outline"></i>
+                            <span class="nav-text">Profile</span>
+                        </span>
+                    </li>
+                    <li nz-menu-item routerLink="users">
+                        <span title>
+                            <i nz-icon type="team" theme="outline"></i>
+                            <span class="nav-text">Users</span>
+                        </span>
+                    </li>
+                    <li nz-menu-item (click)="signout()">
+                        <span title>
+                            <i nz-icon type="unlock" theme="outline"></i>
+                            <span class="nav-text">Sign Out</span>
+                        </span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nz-sider>
+    <nz-layout>
+        <nz-content>
+            <router-outlet></router-outlet>
+        </nz-content>
+        <nz-footer>
+            <p class="text-center footer">
+                <a target="_blank" href="{{ brandURL }}">{{ brand }}</a> © {{ now | date : 'yyyy'}}
+            </p>
+        </nz-footer>
+    </nz-layout>
+</nz-layout>

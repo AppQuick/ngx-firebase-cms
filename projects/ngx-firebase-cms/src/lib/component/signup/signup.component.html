@@ -1,0 +1,40 @@
+<div class="table-cell">
+  <form *ngIf="!isLoading" nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group [nzPrefix]="prefixUserTemplate" nzSize="large">
+          <input type="text" nz-input formControlName="userName" placeholder="Username" autocomplete="email" autofocus>
+        </nz-input-group>
+        <nz-form-explain *ngIf="validateForm.get('userName').dirty && validateForm.get('userName').errors">Please
+          input
+          your username!</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group [nzPrefix]="prefixLockTemplate" nzSize="large">
+          <input type="password" nz-input formControlName="password" placeholder="Password" autocomplete="password">
+        </nz-input-group>
+        <nz-form-explain *ngIf="validateForm.get('password').dirty && validateForm.get('password').errors">Please
+          input
+          your Password!</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button class="login-form-button" [nzType]="'primary'" nzSize="large">Sign up</button>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <p class="text-center">You are member? Login <a routerLink="../login">here</a></p>
+    </nz-form-item>
+  </form>
+</div>
+
+<ng-template #prefixUserTemplate>
+  <i nz-icon type="user" theme="outline"></i>
+</ng-template>
+
+<ng-template #prefixLockTemplate>
+  <i nz-icon type="lock" theme="outline"></i>
+</ng-template>
