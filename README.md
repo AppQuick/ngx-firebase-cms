@@ -43,7 +43,10 @@ cd <project-name>
 ### 2. Install NGX-FIREBASE-CMS
 ```
 npm i -S ngx-firebase-cms
+npm i -S @angular/fire firebase 
+ng add ng-zorro-antd
 ```
+
 
 ### 3. Add Firebase config to environments variable
 Open `/src/environments/environment.ts` and add your Firebase configuration. You can find your project configuration in the [Firebase Console](https://console.firebase.google.com/). From the project overview page, click Add Firebase to your web app.
@@ -63,7 +66,7 @@ export const environment = {
   }
 };
 ```
-### 4. Setup @NgModule for the NgxFirebaseCmsModule
+### 4. Setup @NgModule for the NgxFirebaseCMSModule and edit `app.component.html`
 Open `/src/app/app.module.ts`, inject the NgxFirebaseCms and BrowserAnimationsModule providers, and specify your NgxFirebaseCms configuration.
 ```
 
@@ -71,7 +74,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire';
-import { NgxFirebaseCmsModule } from 'ngx-firebase-cms';
+import { NgxFirebaseCMSModule } from 'ngx-firebase-cms';
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 ...
@@ -81,7 +84,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    NgxFirebaseCmsModule.forRoot(environment.ngxFirebaseCms)
+    NgxFirebaseCMSModule.forRoot(environment.ngxFirebaseCms)
     ...
   ],
   declarations: [ AppComponent ],
@@ -89,6 +92,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 })
 export class AppModule {}
 ```
+
+Open `/src/app/app.component.html`, replace with `<router-outlet></router-outlet>`
 
 ### 5. Enable Email/Password Authenication Provider
 Open `console.firebase.google.com` and go to `Develop > Authentication > Sign-in method`
@@ -108,15 +113,15 @@ service cloud.firestore {
 > This is temporary settings, it is not safe as everyone could register to be a user using any email.
 
 ### 7. Add ngx-firebase-cms Admin Panel to route module
-Open `app-routing.module.ts` and add the `NgxFirebaseCmsModule`
+Open `app-routing.module.ts` and add the `NgxFirebaseCMSModule`
 
 ```
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { NgxFirebaseCmsModule } from 'ngx-firebase-cms';
+import { NgxFirebaseCMSModule } from 'ngx-firebase-cms';
 
 const routes: Routes = [
-  { path: 'admin', loadChildren: () => NgxFirebaseCmsModule },
+  { path: 'admin', loadChildren: () => NgxFirebaseCMSModule },
   /***
     Your other routes
   ***/
