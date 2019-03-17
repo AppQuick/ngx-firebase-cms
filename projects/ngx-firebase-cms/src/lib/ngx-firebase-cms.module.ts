@@ -38,6 +38,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TitleBarComponent } from './shared/title-bar/title-bar.component';
 import { BreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
 import { TableComponent } from './shared/table/table.component';
+import { UserPipe } from './pipe/user.pipe';
 
 const icons: IconDefinition[] = [ UserOutline, LockOutline, IdcardOutline, TeamOutline, FormOutline, SettingOutline, DesktopOutline, UnlockOutline, HddOutline, PictureOutline, MailOutline, ContactsOutline ];
 
@@ -64,7 +65,7 @@ registerLocaleData(en);
     UsersComponent, 
     TitleBarComponent, 
     BreadcrumbComponent, 
-    TableComponent
+    TableComponent, UserPipe
   ],
   imports: [
     CommonModule,

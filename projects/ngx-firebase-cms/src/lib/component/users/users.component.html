@@ -1,2 +1,3 @@
 <cms-title-bar title="Users"></cms-title-bar>
 <cms-breadcrumb [items]="[{ label: 'Users'}]"></cms-breadcrumb>
+<cms-table [data]="(items | async) || []" [headers]="header"></cms-table>

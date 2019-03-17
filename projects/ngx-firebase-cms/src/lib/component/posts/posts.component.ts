@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { en_US, NzI18nService } from 'ng-zorro-antd';
-import { DocumentChangeAction, AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from '../../service/auth.service';
 import { Observable } from 'rxjs';
-import { NzNotificationService, NzMessageService } from 'ng-zorro-antd';
-import { take, map, tap, catchError } from 'rxjs/operators';
+import { map, tap, mergeMap } from 'rxjs/operators';
 import { Post } from '../../interface/post';
 import { HelperService } from '../../service/helper.service';
+import { untilComponentDestroyed } from '../../service/helper.service';
+import { TableHeader } from '../../interface/table';
 
 
 @Component({
@@ -14,37 +14,49 @@ import { HelperService } from '../../service/helper.service';
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css']
 })
-export class PostsComponent implements OnInit {
-  items: Observable<Post[]>
-  header = [
+export class PostsComponent implements OnInit, OnDestroy {
+  items: Observable<Post[] | { $key: string }[]>
+  header: Array<TableHeader> = [
     {
       label: "Title",
-      key: "title"
+      key: "title",
+      canFilter: true,
+      routerLink: "../posts/${$key}"
     },
     {
       label: "Author",
-      key: "owner"
+      key: "author",
+      pipe: "user",
+      pipeParameter: {
+        "keys": ["displayName"],
+        "separator": ","
+      },
+      canSort: false
     },
     {
       label: "Last Update",
-      key: "updatedTime"
+      key: "updatedTime",
+      pipe: "date",
+      pipeParameter: "medium",
+      canSort: true,
     }
   ]
 
   constructor(
     private auth: AuthService,
     private afs: AngularFirestore,
-    private helper: HelperService,
-    private message: NzMessageService,
-    private notification: NzNotificationService
-  ) { 
+    private helper: HelperService
+  ) {
   }
 
   ngOnInit() {
-    console.log(this.auth.role)
-    this.items = this.afs.collection(`posts`, ref => this.helper.postFilter(ref, this.auth.role, this.auth.uid)).snapshotChanges().pipe(
-      map(actions => actions.map(action => ({ $key: action.payload.doc.id, ...action.payload.doc.data() })))
+    this.items = this.auth.user$.pipe(
+      mergeMap(user => this.afs.collection(`posts`, ref => this.helper.roleFilter(ref, user.roles, user.uid, "post")).snapshotChanges()),
+      map(actions => actions.map(action => ({ $key: action.payload.doc.id, ...action.payload.doc.data() }))),
+      untilComponentDestroyed(this)
     )
   }
+
+  ngOnDestroy() { }
 
 }

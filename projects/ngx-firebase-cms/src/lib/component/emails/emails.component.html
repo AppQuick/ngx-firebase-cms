@@ -1,2 +1,3 @@
 <cms-title-bar title="Emails"></cms-title-bar>
 <cms-breadcrumb [items]="[{ label: 'Emails'}]"></cms-breadcrumb>
+<cms-table [data]="(items | async) || []" [headers]="header"></cms-table>

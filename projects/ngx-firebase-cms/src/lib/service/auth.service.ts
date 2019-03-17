@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { User } from '../interface/user';
 import * as firebase from 'firebase/app';
@@ -14,14 +14,14 @@ import { NzMessageService } from 'ng-zorro-antd';
 })
 export class AuthService {
 
-  user$: Observable<User>;
-  uid: string;
-  displayName: string;
-  email: string;
-  profileURL: string;
-  emailVerified : boolean;
-  lastLogin: Date;
-  role: string;
+  user$: Observable<User>
+  uid: string
+  displayName: string
+  email: string
+  profileURL: string
+  emailVerified : boolean
+  lastLogin: Date
+  role: string
 
   constructor(
     @Inject('env') private config: EnvConfig,
@@ -50,7 +50,7 @@ export class AuthService {
         if (user) {
           this.displayName = user["displayName"]
           this.profileURL = user["profileURL"]
-          this.role = user["role"]
+          this.role = user["roles"]
         }
       })
     )

@@ -1,6 +1,6 @@
 {
   "name": "ngx-firebase-cms",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "Angular Content Management System using Google Firebase (Authentication, Storage & Firestore)",
   "repository": {
     "type": "git",

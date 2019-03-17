@@ -1,9 +1,6 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { DocumentChangeAction, AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { AuthService } from '../../service/auth.service';
-import { NzNotificationService, NzMessageService } from 'ng-zorro-antd';
-import { take, map, tap } from 'rxjs/operators';
+import { Component, OnInit, Input } from '@angular/core';
+import { getInterpolation } from '../../service/helper.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'cms-table',
@@ -13,76 +10,72 @@ import { take, map, tap } from 'rxjs/operators';
 export class TableComponent implements OnInit {
   
   @Input() set data(value: any) {
+    this.fullData = value
     this.displayData = value
-    this.getFilterList()
     this.tableLoading = false
+    this.getFilterList()
   }
-  @Input() header = []
+  @Input() headers = []
+  fullData = []
   displayData = []
   tableLoading = true
   noPerPage = 10
+
+  // sort & filter
   sortName
   sortValue
   listOfSearchValue = []
   searchKey
   filterList = {}
+ 
 
   constructor(
-    private auth: AuthService,
-    private afs: AngularFirestore,
-    private message: NzMessageService,
-    private notification: NzNotificationService
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
   }
 
-  private getFilterList() {
-    this.filterList = {
-      "projectCode": [],
-      "description": [],
-      "type": [],
-      "dateRange": [],
-      "owner": [],
-    }
-    if (this.data && this.data.length > 0) {
-      this.filterList['projectCode'] = this.data.map(res => res['projectCode']).filter((value, index, self) => self.indexOf(value) === index).sort((a, b) => (a > b ? 1 : -1)).map(res => {
-        return { "text": res, "value": res }
-      })
-      this.filterList['description'] = this.data.map(res => res['description']).filter((value, index, self) => self.indexOf(value) === index).sort((a, b) => (a > b ? 1 : -1)).map(res => {
-        return { "text": res, "value": res }
-      })
-      this.filterList['type'] = this.data.map(res => res['type']).filter((value, index, self) => self.indexOf(value) === index).sort((a, b) => (a > b ? 1 : -1)).map(res => {
-        return { "text": res, "value": res }
-      })
-      this.filterList['dateRange'] = this.data.map(res => res['dateRange']).filter((value, index, self) => self.indexOf(value) === index).sort((a, b) => (a > b ? 1 : -1)).map(res => {
-        return { "text": res, "value": res }
-      })
-    }
+  /* Filtering & Sorting */
+  getFilterList() {
+    let filterKeys = this.headers.filter(res => res['canFilter']).map(res => res['key'])
+    filterKeys.forEach(key => {
+      this.filterList[key] = this.fullData.map(res => res[key]).filter((value, index, self) => self.indexOf(value) === index).sort((a, b) => (a > b ? 1 : -1)).map(res => {return { "text": res, "value": res }})
+    })
   }
 
-  sort(sort: { key: string, value: string }): void {
+  sort(sort: { key: string, value: string }) {
     this.sortName = sort.key;
     this.sortValue = sort.value;
     this.search();
   }
 
-  filter(event, uuid): void {
+  filter(event, uuid) {
     this.listOfSearchValue = event;
     this.searchKey = uuid;
     this.search();
   }
 
-  search(): void {
-    const filterFunc = item => (this.listOfSearchValue.length ? this.listOfSearchValue.some(name => item[this.searchKey].indexOf(name) !== -1) : true);
-    const data = this.data.filter(item => filterFunc(item));
+  search() {
+    const filterFunc = item => this.listOfSearchValue.length ? this.listOfSearchValue.some(name => item[this.searchKey].indexOf(name) !== -1) : true;
+    const data = this.fullData.filter(item => filterFunc(item))
     if (this.sortName && this.sortValue) {
-      this.displayData = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortName] > b[this.sortName] ? 1 : -1) : (b[this.sortName] > a[this.sortName] ? 1 : -1));
+      this.displayData = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortName] > b[this.sortName] ? 1 : -1) : (b[this.sortName] > a[this.sortName] ? 1 : -1))
     } else {
-      this.displayData = data;
+      this.displayData = data
     }
   }
 
+  goTo(url, data) {
+    if (url) {
+      getInterpolation(url).forEach(key => {
+        let replacement = data[key] || ""
+        url = url.split("${"+key+"}").join(replacement)
+      })
+      this.router.navigate([url], {relativeTo: this.route})
+    }
+  }
   
 
 }

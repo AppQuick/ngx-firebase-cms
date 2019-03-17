@@ -1,2 +1,3 @@
 <cms-title-bar title="Forms"></cms-title-bar>
 <cms-breadcrumb [items]="[{ label: 'Forms'}]"></cms-breadcrumb>
+<cms-table [data]="(items | async) || []" [headers]="header"></cms-table>
