@@ -23,7 +23,7 @@ import { NzMessageService, NzI18nService, en_US } from 'ng-zorro-antd';
         ]),
         transition(':leave', [
           style({transform: 'translateX(0)', opacity: 1}),
-          animate('500ms', style({transform: 'translateX(-100%)', opacity: 0}))
+          animate('50ms', style({transform: 'translateX(-100%)', opacity: 0}))
         ])
       ]
     )
@@ -57,7 +57,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.sub = this.auth.user$.subscribe(user =>{ this.user = user}, err => this.message.error(err))
+    this.sub = this.auth.user$.subscribe(user =>{ this.user = user;}, err => this.message.error(err))
   }
 
   ngOnDestroy() {

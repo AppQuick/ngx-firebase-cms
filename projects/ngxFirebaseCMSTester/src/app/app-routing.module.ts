@@ -4,9 +4,9 @@ import { NgxFirebaseCMSModule } from 'ngx-firebase-cms';
 import { HomepageComponent } from './homepage/homepage.component';
 
 const routes: Routes = [
-  { path: '', component: HomepageComponent },
-  { path: 'admin', loadChildren: () => NgxFirebaseCMSModule },
-  { path: '**', redirectTo: '/' }
+  { path: 'yourOtherPath', component: HomepageComponent },
+  { path: '', loadChildren: () => NgxFirebaseCMSModule },
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

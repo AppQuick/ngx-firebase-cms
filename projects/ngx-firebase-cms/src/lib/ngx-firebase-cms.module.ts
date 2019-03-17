@@ -39,6 +39,7 @@ import { TitleBarComponent } from './shared/title-bar/title-bar.component';
 import { BreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
 import { TableComponent } from './shared/table/table.component';
 import { UserPipe } from './pipe/user.pipe';
+import { PageComponent } from './component/page/page.component';
 
 const icons: IconDefinition[] = [ UserOutline, LockOutline, IdcardOutline, TeamOutline, FormOutline, SettingOutline, DesktopOutline, UnlockOutline, HddOutline, PictureOutline, MailOutline, ContactsOutline ];
 
@@ -65,7 +66,7 @@ registerLocaleData(en);
     UsersComponent, 
     TitleBarComponent, 
     BreadcrumbComponent, 
-    TableComponent, UserPipe
+    TableComponent, UserPipe, PageComponent
   ],
   imports: [
     CommonModule,
@@ -96,7 +97,27 @@ registerLocaleData(en);
     SignupComponent
   ],
   entryComponents: [
-    SignupComponent
+    DashboardComponent, 
+    LoginComponent, 
+    HomeComponent, 
+    DynamicFormComponent, 
+    DynamicBuilderComponent, 
+    EmailComponent, 
+    EmailsComponent, 
+    FileComponent, 
+    FilesComponent, 
+    FormComponent, 
+    FormsComponent, 
+    PostsComponent, 
+    PostComponent, 
+    ProfileComponent, 
+    SignupComponent, 
+    UserComponent, 
+    UsersComponent, 
+    TitleBarComponent, 
+    BreadcrumbComponent, 
+    TableComponent, 
+    PageComponent
   ]
 })
 export class NgxFirebaseCMSModule { 

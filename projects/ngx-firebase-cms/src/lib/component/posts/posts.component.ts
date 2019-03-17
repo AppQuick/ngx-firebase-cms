@@ -51,7 +51,7 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.items = this.auth.user$.pipe(
-      mergeMap(user => this.afs.collection(`posts`, ref => this.helper.roleFilter(ref, user.roles, user.uid, "post")).snapshotChanges()),
+      mergeMap(user => this.afs.collection(`posts`, ref => this.helper.roleFilter(ref, user['roles'], user['uid'], "post")).snapshotChanges()),
       map(actions => actions.map(action => ({ $key: action.payload.doc.id, ...action.payload.doc.data() }))),
       untilComponentDestroyed(this)
     )

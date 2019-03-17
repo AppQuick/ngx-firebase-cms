@@ -64,7 +64,7 @@
         </ul>
     </nz-sider>
     <nz-layout>
-        <nz-content class="content-padding">
+        <nz-content [ngClass]="{'content-padding': user}">
             <router-outlet></router-outlet>
         </nz-content>
         <nz-footer>
