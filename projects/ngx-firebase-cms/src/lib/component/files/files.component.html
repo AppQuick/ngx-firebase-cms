@@ -1,3 +1,34 @@
-<p>
-  files works!
-</p>
+<nz-page-header nzTitle="Media Library">
+  <nz-breadcrumb nz-page-header-breadcrumb>
+    <nz-breadcrumb-item>Home</nz-breadcrumb-item>
+    <nz-breadcrumb-item>Media Library</nz-breadcrumb-item>
+  </nz-breadcrumb>
+  <nz-page-header-content>
+    <div class="wrap">
+      <div class="content">
+        <div class="content">
+          <p>Media consists of the images, video, recordings, and files that you upload and use in your blog. </p>
+          <p class="content-link">
+            <button (click)="isShowUploadArea = !isShowUploadArea" nz-button nzType="default"><i nz-icon nzType="cloud-upload" nzTheme="outline"></i> Upload</button>
+          </p>
+          <nz-upload [hidden]="!isShowUploadArea" nzType="drag" [nzMultiple]="true" [nzBeforeUpload]="fileService.beforeUpload" [nzCustomRequest]="fileService.massUploadFile" [nzShowUploadList]="false">
+            <p class="ant-upload-drag-icon">
+              <i nz-icon type="inbox"></i>
+            </p>
+            <p class="ant-upload-text">Click or drag file to this area to upload</p>
+            <p class="ant-upload-hint">
+              Support for a single or bulk upload. Only JPEG and less than 1 MB each
+            </p>
+          </nz-upload>
+        </div>
+      </div>
+    </div>
+  </nz-page-header-content>
+</nz-page-header>
+
+<div class="images-container">
+  <ng-template ngFor let-file [ngForOf]="files | async">
+    <div class="img-container" (click)="open(file.$key)" [style.background-image]="'url(' + file.url + ')'"></div>
+  </ng-template>
+</div>
+

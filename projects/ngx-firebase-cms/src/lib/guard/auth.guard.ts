@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate {
           let roles = next.data["roles"] as Array<string>
           let isAuth = false
           user.roles.forEach(userRole => {
-            if (roles.indexOf(userRole)) {
+            if (roles.indexOf(userRole) > -1) {
               isAuth = true
             }
           })

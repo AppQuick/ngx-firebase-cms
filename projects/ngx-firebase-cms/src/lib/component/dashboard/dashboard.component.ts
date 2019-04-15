@@ -12,7 +12,7 @@ import { filter } from 'rxjs/operators';
   selector: 'aq-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: [
-    "../../../../node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+    '../../../../../../node_modules/ng-zorro-antd/ng-zorro-antd.min.css',
     './dashboard.component.css'
   ],
   animations: [

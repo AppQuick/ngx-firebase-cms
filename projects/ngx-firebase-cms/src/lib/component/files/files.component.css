@@ -1,0 +1,13 @@
+.images-container {
+    background:#fff; 
+    padding: 24px; 
+    min-height: 380px;
+}
+.img-container {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}

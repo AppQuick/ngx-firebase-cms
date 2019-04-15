@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { User } from '../interface/user';
 import * as firebase from 'firebase/app';
@@ -16,6 +16,12 @@ import { NzMessageService } from 'ng-zorro-antd';
 export class AuthService {
 
   user$: Observable<User>;
+  uid: string;
+  displayName: string;
+  email: string;
+  profileURL: string;
+  emailVerified : boolean;
+  lastLogin: Date;
 
   constructor(
     @Inject('env') private config: EnvConfig,
@@ -25,6 +31,14 @@ export class AuthService {
     private afs: AngularFirestore
   ) {
     this.user$ = this.afAuth.authState.pipe(
+      tap(res => {
+        if (res) {
+          this.uid = res["uid"]
+          this.email = res["email"]
+          this.emailVerified = res["emailVerified"]
+          this.lastLogin = new Date(res["metadata"]["lastSignInTime"])
+        }
+      }),
       switchMap(user => {
         if (user) {
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges()

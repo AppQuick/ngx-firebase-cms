@@ -6,7 +6,7 @@ import { registerLocaleData } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { IconDefinition } from '@ant-design/icons-angular';
 import { NgZorroAntdModule, NZ_ICON_DEFAULT_TWOTONE_COLOR, NZ_ICONS } from 'ng-zorro-antd';
-import { UserOutline, LockOutline, IdcardOutline, TeamOutline, FormOutline, SettingOutline, DesktopOutline, UnlockOutline, HddOutline, PictureOutline, MailFill, MailOutline, ContactsOutline } from '@ant-design/icons-angular/icons';
+import { InboxOutline, UserOutline, LockOutline, IdcardOutline, TeamOutline, FormOutline, SettingOutline, DesktopOutline, UnlockOutline, HddOutline, PictureOutline, MailFill, MailOutline, ContactsOutline, CloudOutline, CloudUploadOutline } from '@ant-design/icons-angular/icons';
 import en from '@angular/common/locales/en';
 import { NZ_I18N, en_US } from 'ng-zorro-antd';
 import { DynamicBuilderComponent } from './component/dynamic-builder/dynamic-builder.component';
@@ -29,11 +29,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxFirebaseCmsRoutingModule } from './ngx-firebase-cms-routing.module';
 import { ExcelService } from './service/excel.service';
 import { AuthService } from './service/auth.service';
+import { FileService } from './service/file.service';
 import { AuthGuard } from './guard/auth.guard';
 import { UnauthGuard } from './guard/unauth.guard';
 import { HelperService } from './service/helper.service';
 import { EmailsComponent } from './component/emails/emails.component';
-const icons: IconDefinition[] = [ UserOutline, LockOutline, IdcardOutline, TeamOutline, FormOutline, SettingOutline, DesktopOutline, UnlockOutline, HddOutline, PictureOutline, MailOutline, ContactsOutline ];
+import { HttpClientModule } from '@angular/common/http';
+const icons: IconDefinition[] = [ InboxOutline, CloudOutline, CloudUploadOutline, UserOutline, LockOutline, IdcardOutline, TeamOutline, FormOutline, SettingOutline, DesktopOutline, UnlockOutline, HddOutline, PictureOutline, MailOutline, ContactsOutline ];
 
 registerLocaleData(en);
 
@@ -59,6 +61,7 @@ registerLocaleData(en);
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
     AngularFireAuthModule,
     FormsModule,
     ReactiveFormsModule,
@@ -74,6 +77,7 @@ registerLocaleData(en);
     ExcelService,
     AuthService,
     HelperService,
+    FileService,
     AuthGuard,
     UnauthGuard,
     { provide: NZ_I18N, useValue: en_US },

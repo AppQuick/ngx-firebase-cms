@@ -24,10 +24,10 @@
   },
   "homepage": "https://github.com/AppQuick/ngx-firebase-cms",
   "peerDependencies": {
-    "@angular/common": "^7.2.0",
-    "@angular/core": "^7.2.0",
-    "@angular/fire": "^5.1.1",
-    "ng-zorro-antd": "^7.0.0-rc.3",
-    "firebase": "^5.8.2"
+    "@angular/common": "^7.2.9",
+    "@angular/core": "^7.2.9",
+    "@angular/fire": "^5.1.2",
+    "ng-zorro-antd": "^7.2.0",
+    "firebase": "^5.8.6"
   }
 }
