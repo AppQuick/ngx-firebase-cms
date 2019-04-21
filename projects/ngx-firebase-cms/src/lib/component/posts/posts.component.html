@@ -1,4 +1,5 @@
 <aq-title-bar [data]="titlebar"></aq-title-bar>
+<aq-table [data]="(items | async) || []" [headers]="header"></aq-table>
 
 <div class="container">
     <nz-button-group>
@@ -17,3 +18,4 @@
 {{ form.value.htmlContent }}
 
 </nz-drawer>
+

@@ -1,0 +1,35 @@
+<nz-table #basicTable [nzData]="displayData" class="table" [nzPageSize]="noPerPage">
+  <thead (nzSortChange)="sort($event)" nzSingleSort>
+    <tr>
+      <ng-template ngFor let-header [ngForOf]="headers">
+        <th *ngIf="!header.canSort && !header.canFilter">{{ header?.label }}</th>
+        <th *ngIf="!header.canSort && header.canFilter" nzShowFilter [nzFilters]="filterList[header?.key] || []"
+          (nzFilterChange)="filter($event, header?.key)">{{ header?.label }}</th>
+        <th *ngIf="header.canSort && !header.canFilter" [nzSortKey]="header?.key" nzShowSort>{{ header?.label }}</th>
+        <th *ngIf="header.canSort && header.canFilter" [nzSortKey]="header?.key" nzShowSort nzShowFilter
+          [nzFilters]="filterList[header?.key] || []" (nzFilterChange)="filter($event, header?.key)">{{ header?.label }}
+        </th>
+      </ng-template>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-template ngFor let-data [ngForOf]="basicTable.data">
+      <tr>
+        <td *ngFor="let header of headers">
+          <a [ngClass]='{"disableLink": !header.routerLink }' (click)="goTo(header.routerLink, data)">
+            <ng-template [ngIf]="header.pipe == 'date'">{{ data[header.key].toDate() | date : header.pipeParameter}}
+            </ng-template>
+            <ng-template [ngIf]="header.pipe == 'user'">
+              <ng-container *ngIf="data[header.key] | user : header.pipeParameter | async as user; else loading">
+                <ng-container *ngIf="user; else noItems">{{ user }}</ng-container>
+                <ng-template #noItems>{{data[header.key]}}</ng-template>
+              </ng-container>
+              <ng-template #loading><i nz-icon type="loading" theme="outline"></i></ng-template>
+            </ng-template>
+            <ng-template [ngIf]="!header.pipe">{{ data[header.key]}}</ng-template>
+          </a>
+        </td>
+      </tr>
+    </ng-template>
+  </tbody>
+</nz-table>

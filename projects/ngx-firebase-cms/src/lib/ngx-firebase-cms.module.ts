@@ -33,6 +33,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { TitleBarComponent } from './directive/title-bar/title-bar.component';
 import { EditorComponent } from './directive/editor/editor.component';
 import { EditorToolbarComponent } from './directive/editor-toolbar/editor-toolbar.component';
+import { TableComponent } from './shared/table/table.component';
+import { UserPipe } from './pipe/user.pipe';
+import { PageComponent } from './component/page/page.component';
 const icons: IconDefinition[] = [ BarsOutline, DisconnectOutline, LinkOutline, DeleteOutline, CodeOutline, MenuFoldOutline, MenuUnfoldOutline,UndoOutline, RedoOutline, BoldOutline, ItalicOutline, UnderlineOutline, StrikethroughOutline, AlignLeftOutline, AlignCenterOutline, AlignRightOutline, OrderedListOutline, UnorderedListOutline, FontSizeOutline, LineHeightOutline, BgColorsOutline, PlusOutline, MinusOutline, FontColorsOutline, SecurityScanOutline, HomeOutline, InboxOutline, CloudOutline, CloudUploadOutline, UserOutline, LockOutline, IdcardOutline, TeamOutline, FormOutline, SettingOutline, DesktopOutline, UnlockOutline, HddOutline, PictureOutline, MailOutline, ContactsOutline];
 
 registerLocaleData(en);
@@ -50,10 +53,13 @@ registerLocaleData(en);
     HomeComponent,
     ProfileComponent,
     FormsComponent,
+    TableComponent,
     EmailsComponent,
     TitleBarComponent,
     EditorComponent,
-    EditorToolbarComponent
+    EditorToolbarComponent,
+    UserPipe,
+    PageComponent
   ],
   imports: [
     CommonModule,
@@ -74,6 +80,7 @@ registerLocaleData(en);
     AuthService,
     HelperService,
     FileService,
+    UserPipe,
     AuthGuard,
     UnauthGuard,
     { provide: NZ_I18N, useValue: en_US },

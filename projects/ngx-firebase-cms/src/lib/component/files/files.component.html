@@ -16,4 +16,4 @@
     <div class="img-container" (click)="open(file.$key)" [style.background-image]="'url(' + file.url + ')'"></div>
   </ng-template>
 </div>
-
+<aq-table [data]="(items | async) || []" [headers]="header"></aq-table>

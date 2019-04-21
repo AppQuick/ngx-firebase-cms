@@ -56,3 +56,11 @@ body {
 .container {
     padding: 0 32px;
 }
+
+.content-padding {
+    padding: 20px;
+}
+
+.ant-menu-item {
+    outline: 0;
+}

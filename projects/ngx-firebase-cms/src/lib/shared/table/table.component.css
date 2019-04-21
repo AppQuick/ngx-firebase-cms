@@ -1,0 +1,17 @@
+.table {
+    margin-top: 20px;
+}
+
+::ng-deep .table table {
+    background-color: white;
+}
+
+::ng-deep .ant-table-pagination.ant-pagination {
+    margin-right: 20px;
+}
+
+::ng-deep .disableLink, ::ng-deep .disableLink:hover, ::ng-deep .disableLink:focus, ::ng-deep .disableLink:active, ::ng-deep .disableLink:focus-within, ::ng-deep .disableLink:visited {
+    color: rgba(0,0,0,.65);
+    cursor: auto;
+    text-decoration: none;
+}

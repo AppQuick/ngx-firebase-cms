@@ -28,6 +28,29 @@ export class FilesComponent implements OnInit, OnDestroy {
     ]
   }
 
+  items: Observable<Post[] | { $key: string }[]>
+  header = [
+    {
+      label: "Title",
+      key: "title"
+    },
+    {
+      label: "Author",
+      key: "author",
+      pipe: "user",
+      pipeParameter: {
+        "keys": ["displayName"],
+        "separator": ","
+      }
+    },
+    {
+      label: "Last Update",
+      key: "updatedTime",
+      pipe: "date",
+      pipeParameter: "medium"
+    }
+  ]
+
   constructor(
     private unsubscription: UnsubscriptionService,
     public fileService: FileService,

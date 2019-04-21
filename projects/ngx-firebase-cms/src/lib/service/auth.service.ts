@@ -23,6 +23,7 @@ export class AuthService {
   profileURL: string;
   emailVerified : boolean;
   lastLogin: Date;
+  role
 
   constructor(
     @Inject('env') private config: EnvConfig,
@@ -45,6 +46,13 @@ export class AuthService {
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
         } else {
           return of(null)
+        }
+      }),
+      tap(user => {
+        if (user) {
+          this.displayName = user["displayName"]
+          this.profileURL = user["profileURL"]
+          this.role = user["roles"]
         }
       })
     )
