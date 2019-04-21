@@ -9,6 +9,7 @@ import * as firebase from 'firebase/app';
 import { FirebaseApp } from '@angular/fire';
 import { EnvConfig } from '../interface/env-config';
 import { NzMessageService } from 'ng-zorro-antd';
+import { Log } from '../interface/log';
 
 @Injectable({
   providedIn: 'root'
@@ -124,5 +125,15 @@ export class AuthService {
       }
     }
     return false
+  }
+
+  log (description: string) {
+    if (this.uid) {
+      this.afs.collection<Log>('log').add({
+        "description": description,
+        "uid": this.uid,
+        "createdTime": firebase.firestore.FieldValue.serverTimestamp()
+      })
+    }
   }
 }

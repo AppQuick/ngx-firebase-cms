@@ -1,0 +1,40 @@
+.img-rounded {
+    border-radius: 50%;
+    width: 80%;
+    position: relative;
+}
+
+.img-rounded:hover {
+    opacity: 1;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    border-top: 1px solid rgb(232, 232, 232);
+    padding: 10px 16px;
+    left: 0px;
+    z-index: 9999;
+    background: #fff;
+}
+
+.footer button {
+    margin-left: 10px;
+}
+
+.m-r-10 {
+    margin-right: 10px;
+}
+
+.w-200 {
+    width: 200px;
+}
+
+.user-profile {
+    width: 200px;
+    height: 200px;
+    background: #efefef;
+    border-radius: 50%;
+    background-size: cover;
+}

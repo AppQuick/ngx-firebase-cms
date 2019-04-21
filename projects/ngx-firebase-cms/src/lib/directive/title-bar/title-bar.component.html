@@ -1,0 +1,19 @@
+<nz-page-header [nzTitle]="data?.title">
+  <nz-breadcrumb nz-page-header-breadcrumb>
+      <nz-breadcrumb-item>
+        <a (click)="goToHome()"><i nz-icon nzType="home" nzTheme="outline"></i> Home </a>
+      </nz-breadcrumb-item>
+    <nz-breadcrumb-item *ngFor="let breadcrumb of data?.breadcrumbs">
+      <a (click)="goTo(breadcrumb?.route)"><i *ngIf="breadcrumb?.icon" nz-icon [nzType]="breadcrumb?.icon" nzTheme="outline"></i> {{ breadcrumb?.title }} </a>
+    </nz-breadcrumb-item>
+  </nz-breadcrumb>
+  <nz-page-header-content>
+    <div class="wrap">
+      <div class="content">
+        <div class="content">
+          <p>{{ data?.description }}</p>
+        </div>
+      </div>
+    </div>
+  </nz-page-header-content>
+</nz-page-header>

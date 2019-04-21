@@ -28,6 +28,7 @@
     "@angular/core": "^7.2.9",
     "@angular/fire": "^5.1.2",
     "ng-zorro-antd": "^7.2.0",
-    "firebase": "^5.8.6"
+    "firebase": "^5.8.6",
+    "lodash": "^4.17.11"
   }
 }

@@ -1,3 +1,29 @@
+.logo.open {
+    height: 120px;
+    width: 120px;
+}
+
+.logo {
+    height: 70px;
+    background-color: #333;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    margin: 30px auto;
+    border-radius: 50%;
+    border: 4px solid #001529;
+    border: 4px solid rgba(0, 21, 41, 0.9);
+    background-origin: border-box;
+    width: 70px;
+    transition: all 0.3s;
+    
+}
+
+.logo:hover {
+    border: 4px solid rgba(100, 100, 100, 0.5);
+    background-origin: border-box;
+}
+
 body {
     margin: 0;
 }
@@ -12,4 +38,21 @@ body {
 
 .footer {
     margin: 0;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.ant-layout-content {
+    background: white;
+}
+
+.ant-layout-footer {
+    padding: 15px 50px;
+    background: white;
+}
+
+.container {
+    padding: 0 32px;
 }

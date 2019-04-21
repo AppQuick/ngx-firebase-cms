@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Breadcrumb } from '../../interface/breadcrumb';
+import { UnsubscriptionService } from '../../service/unsubscription.service';
+import { Titlebar } from '../../interface/titlebar';
 
 @Component({
   selector: 'aq-users',
@@ -7,7 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsersComponent implements OnInit {
 
-  constructor() { }
+  titlebar: Titlebar = {
+    title: "Profile",
+    description: "User Management",
+    breadcrumbs: [
+      {
+        title: "Profile",
+        icon: 'team'
+      }
+    ]
+  }
+
+  constructor(
+    private unsubscription: UnsubscriptionService
+  ) { }
 
   ngOnInit() {
   }

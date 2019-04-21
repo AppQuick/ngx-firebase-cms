@@ -2,11 +2,11 @@ import { Component, OnInit, ViewEncapsulation, Inject, OnDestroy } from '@angula
 import { EnvConfig } from '../../interface/env-config';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { User } from '../../interface/user';
-import { NzMessageService } from 'ng-zorro-antd';
+import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
-import { filter } from 'rxjs/operators';
+import { UnsubscriptionService } from '../../service/unsubscription.service';
 
 @Component({
   selector: 'aq-dashboard',
@@ -37,16 +37,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
   brand = ""
   brandURL = "#"
 
-  isCollapsed = true;
-  isReverseArrow = false;
-  width = 200;
+  isCollapsed = false
+  isReverseArrow = false
+  width = 200
   user: User
-  isLoginPage = false;
-  sub
+  isLoginPage = false
 
   constructor(
     @Inject('env') private config: EnvConfig,
     private afs: AngularFirestore,
+    private unsubscription: UnsubscriptionService,
+    private modal: NzModalService,
     private router: Router,
     private auth: AuthService,
     private message: NzMessageService
@@ -56,16 +57,32 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.sub = this.auth.user$.subscribe(user =>{ this.user = user}, err => this.message.error(err))
+    this.auth.user$
+    .pipe(
+      this.unsubscription.untilComponentDestroyed(this)
+    )
+    .subscribe(user =>{ this.user = user}, err => {})
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe()
   }
 
-  signout() {
+  logout() {
     let adminURL = this.config.adminURL || 'admin'
-    this.auth.signOut().then(res => this.router.navigate([`${adminURL}/login`]))
+    this.modal.confirm({
+      "nzTitle": '<i>Logout</i>',
+      "nzIconType": "logout",
+      "nzContent": `<b>Are you sure?</b>`,
+      "nzOnOk": () => {
+        return this.auth.signOut().then(res => {
+          this.router.navigate([`${adminURL}/login`])
+        })
+      }
+    })
+  }
+
+  getProfilePic() {
+    return (this.user.profileURL) ? {'background-image': 'url(\'' + this.user.profileURL + '\')'} : {}
   }
 
 }

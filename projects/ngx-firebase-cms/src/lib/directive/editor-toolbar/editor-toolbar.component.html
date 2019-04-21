@@ -1,0 +1,135 @@
+<div class="angular-editor-toolbar" *ngIf="showToolbar">
+    <nz-button-group>
+      <button nzSize="large" nz-tooltip nz-button type="button" (click)="triggerCommand('undo')" nzTitle="Undo" tabindex="-1">
+        <i nz-icon nzType="undo" nzTheme="outline"></i>
+      </button>
+      <button nzSize="large" nz-tooltip nz-button type="button" (click)="triggerCommand('redo')" nzTitle="Redo" tabindex="-1">
+        <i nz-icon nzType="redo" nzTheme="outline"></i>
+      </button>
+    </nz-button-group>
+    <nz-button-group>
+      <button nzSize="large" nz-tooltip nz-button type="button" [id]="'bold-'+id" (click)="triggerCommand('bold')" nzTitle="Bold" tabindex="-1" [disabled]="htmlMode">
+        <i nz-icon nzType="bold" nzTheme="outline"></i>
+      </button>
+      <button nzSize="large" nz-tooltip nz-button type="button" [id]="'italic-'+id" (click)="triggerCommand('italic')" nzTitle="Italic" tabindex="-1" [disabled]="htmlMode">
+        <i nz-icon nzType="italic" nzTheme="outline"></i>
+      </button>
+      <button nzSize="large" nz-tooltip nz-button type="button" [id]="'underline-'+id" (click)="triggerCommand('underline')" nzTitle="Underline" tabindex="-1" [disabled]="htmlMode">
+        <i nz-icon nzType="underline" nzTheme="outline"></i>
+      </button>
+      <button nzSize="large" nz-tooltip nz-button type="button" [id]="'strikeThrough-'+id" (click)="triggerCommand('strikeThrough')" nzTitle="Strike Through" tabindex="-1" [disabled]="htmlMode">
+        <i nz-icon nzType="strikethrough" nzTheme="outline"></i>
+      </button>
+      <button nzSize="large" nz-tooltip nz-button type="button" [id]="'subscript-'+id" (click)="triggerCommand('subscript')" nzTitle="subscript" tabindex="-1" [disabled]="htmlMode">
+        x<sub>2</sub>
+      </button>
+      <button nzSize="large" nz-tooltip nz-button type="button" [id]="'superscript-'+id" (click)="triggerCommand('superscript')" nzTitle="superscript" tabindex="-1" [disabled]="htmlMode">
+        x<sup>2</sup>
+      </button>
+    </nz-button-group>
+
+    <nz-button-group>
+      <button nzSize="large" [id]="'justifyLeft-'+id" type="button" nz-tooltip nzTitle="Justify Left" nz-button (click)="triggerCommand('justifyLeft')" [disabled]="htmlMode" tabindex="-1">
+        <i nz-icon nzType="align-left" nzTheme="outline"></i>
+      </button>
+      <button nzSize="large" [id]="'justifyCenter-'+id" type="button" nz-tooltip nzTitle="Justify Center" nz-button (click)="triggerCommand('justifyCenter')" [disabled]="htmlMode" tabindex="-1">
+        <i nz-icon nzType="align-center" nzTheme="outline"></i>
+      </button>
+      <button nzSize="large" [id]="'justifyRight-'+id" type="button" nz-tooltip nzTitle="Justify Right" nz-button (click)="triggerCommand('justifyRight')" [disabled]="htmlMode" tabindex="-1">
+        <i nz-icon nzType="align-right" nzTheme="outline"></i>
+      </button>
+      <button nzSize="large" [id]="'justifyFull-'+id" type="button" nz-tooltip nzTitle="Justify Full" nz-button (click)="triggerCommand('justifyFull')" [disabled]="htmlMode" tabindex="-1">
+        <i nz-icon nzType="bars" nzTheme="outline"></i>
+      </button>
+    </nz-button-group>
+
+    <nz-button-group>
+      <button nzSize="large" [id]="'indent-'+id" type="button" nz-tooltip nzTitle="Indent" nz-button (click)="triggerCommand('indent')" [disabled]="htmlMode" tabindex="-1">
+        <i nz-icon nzType="menu-unfold" nzTheme="outline"></i>
+      </button>
+      <button nzSize="large" [id]="'outdent-'+id" type="button" nz-tooltip nzTitle="Outdent" nz-button (click)="triggerCommand('outdent')" [disabled]="htmlMode" tabindex="-1">
+        <i nz-icon nzType="menu-fold" nzTheme="outline"></i>
+      </button>
+    </nz-button-group>
+    <nz-button-group>
+      <button nzSize="large" [id]="'insertUnorderedList-'+id" type="button" nz-tooltip nzTitle="Unordered List" nz-button (click)="triggerCommand('insertUnorderedList')" [disabled]="htmlMode" tabindex="-1">
+        <i nz-icon nzType="unordered-list" nzTheme="outline"></i>
+      </button>
+      <button nzSize="large" [id]="'insertOrderedList-'+id" type="button" nz-tooltip nzTitle="Ordered List" nz-button (click)="triggerCommand('insertOrderedList')" [disabled]="htmlMode" tabindex="-1">
+        <i nz-icon nzType="ordered-list" nzTheme="outline"></i>
+      </button>
+    </nz-button-group>
+    <nz-input-group nzCompact>
+      <nz-select nzSize="large" style="width:auto;" nz-tooltip nzTitle="Formatting" [id]="'heading-'+id" nzPlaceHolder="Formatting" class="select-heading" [(ngModel)]="block" (ngModelChange)="triggerCommand(block)" [disabled]="htmlMode"  tabindex="-1">
+        <nz-option class="h1" nzValue="h1" nzLabel="H1"></nz-option>
+        <nz-option class="h2" nzValue="h2" nzLabel="H2"></nz-option>
+        <nz-option class="h3" nzValue="h3" nzLabel="H3"></nz-option>
+        <nz-option class="h4" nzValue="h4" nzLabel="H4"></nz-option>
+        <nz-option class="h5" nzValue="h5" nzLabel="H5"></nz-option>
+        <nz-option class="h6" nzValue="h6" nzLabel="H6"></nz-option>
+        <nz-option class="p" nzValue="p" nzLabel="P"></nz-option>
+        <nz-option class="pre" nzValue="pre" nzLabel="Pre"></nz-option>
+        <nz-option class="div" nzValue="div" nzLabel="Div"></nz-option>
+        <nz-option class="default" nzValue="default" nzLabel="Default"></nz-option>
+      </nz-select>
+      
+      <nz-select nzSize="large" style="width:auto;" nz-tooltip nzTitle="Font Name" nzPlaceHolder="Font Name" [id]="'fontSelector-'+id" class="select-font" [(ngModel)]="fontId" (ngModelChange)="setFontName(fontId)" [disabled]="htmlMode" tabindex="-1">
+        <nz-option *ngFor="let item of fonts; let i = index" [class]="item.class" [nzValue]="i" [nzLabel]="item.name"></nz-option>
+      </nz-select>
+      
+      <nz-select nzSize="large" style="width:auto;" nz-tooltip nzTitle="Font Size" nzPlaceHolder="Font Sizing" [id]="'fontSizeSelector-'+id" class="select-font-size" [(ngModel)]="fontSize" (ngModelChange)="setFontSize(fontSize)" [disabled]="htmlMode" tabindex="-1">
+        <nz-option class="size1" nzValue="1" nzLabel="1"></nz-option>
+        <nz-option class="size2" nzValue="2" nzLabel="2"></nz-option>
+        <nz-option class="size3" nzValue="3" nzLabel="3"></nz-option>
+        <nz-option class="size4" nzValue="4" nzLabel="4"></nz-option>
+        <nz-option class="size5" nzValue="5" nzLabel="5"></nz-option>
+        <nz-option class="size6" nzValue="6" nzLabel="6"></nz-option>
+        <nz-option class="size7" nzValue="7" nzLabel="7"></nz-option>
+      </nz-select>
+      
+      <nz-select nzSize="large" style="width:auto;margin-right:4px;" nz-tooltip nzTitle="Custom Style" nzPlaceHolder="Custom Class" [id]="'customClassSelector-'+id" class="select-custom-style" [(ngModel)]="customClassId" (ngModelChange)="setCustomClass(customClassId)" [disabled]="htmlMode" tabindex="-1">
+        <nz-option class="" [nzValue]="-1" nzLabel="Clear Class"></nz-option>
+        <nz-option *ngFor="let item of customClasses; let i = index" [class]="item.class" [nzValue]="i" [nzLabel]="item.name"></nz-option>
+      </nz-select>
+
+      <button nzSize="large" [id]="'foregroundColorPicker-'+id" type="button" nz-button (click)="fgInput.click()" nz-tooltip nzTitle="Text Color" [disabled]="htmlMode" tabindex="-1">
+        <span class="color-label foreground">
+          <i nz-icon nzType="font-colors" nzTheme="outline"></i>
+        </span>
+      </button>  
+
+      <button nzSize="large" [id]="'backgroundColorPicker-'+id" type="button" nz-button (click)="bgInput.click()" nz-tooltip nzTitle="Background Color" [disabled]="htmlMode" tabindex="-1">
+        <span class="color-label background">
+          <i nz-icon nzType="bg-colors" nzTheme="outline"></i>
+        </span>
+      </button>
+
+      <button nzSize="large" [id]="'link-'+id" type="button" nz-button (click)="insertUrl()" nz-tooltip nzTitle="Insert Link" [disabled]="htmlMode" tabindex="-1">
+        <i nz-icon nzType="link" nzTheme="outline"></i>
+      </button>
+
+      <button nzSize="large" type="button" nz-button (click)="triggerCommand('unlink')" nz-tooltip nzTitle="Unlink" [disabled]="htmlMode" tabindex="-1">
+        <i nz-icon nzType="disconnect" nzTheme="outline"></i>
+      </button>
+
+      <button nzSize="large" type="button" nz-button (click)="fileInput.click()" nz-tooltip nzTitle="Insert Image" [disabled]="htmlMode" tabindex="-1">
+        <i nz-icon nzType="picture" nzTheme="outline"></i>
+      </button>
+
+      <button nzSize="large" type="button" nz-tooltip nzTitle="Horizontal Line" nz-button (click)="triggerCommand('insertHorizontalRule')" [disabled]="htmlMode" tabindex="-1">
+        <i nz-icon nzType="minus" nzTheme="outline"></i>
+      </button>
+
+      <button nzSize="large" type="button" nz-tooltip nzTitle="Clear Formatting" nz-button (click)="triggerCommand('removeFormat')" [disabled]="htmlMode" tabindex="-1">
+        <i nz-icon nzType="delete" nzTheme="outline"></i>
+      </button>
+      
+      <button nzSize="large" [id]="'toggleEditorMode-'+id" type="button" nz-tooltip nzTitle="HTML Code" nz-button (click)="triggerCommand('toggleEditorMode')" tabindex="-1">
+        <i nz-icon nzType="code" nzTheme="outline"></i>
+      </button>
+    </nz-input-group>
+    
+    <input style="display: none" type="color" (change)="insertColor(fgInput.value, 'textColor')" #fgInput>
+    <input style="display: none" type="color" (change)="insertColor(bgInput.value, 'backgroundColor')" #bgInput>
+    <input style="display: none" accept="image/*" type="file" (change)="onFileChanged($event)" #fileInput>
+</div>

@@ -1,0 +1,14 @@
+.ant-btn:not(.ant-btn-circle):not(.ant-btn-circle-outline).ant-btn-icon-only {
+    padding: 0 15px;
+}
+
+.ant-btn-group {
+    margin-right: 4px;
+    margin-bottom: 4px;
+}
+
+.select {
+    width: 100px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+}

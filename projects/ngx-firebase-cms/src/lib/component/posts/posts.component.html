@@ -1,3 +1,19 @@
-<p>
-  posts works!
-</p>
+<aq-title-bar [data]="titlebar"></aq-title-bar>
+
+<div class="container">
+    <nz-button-group>
+        <button nz-button (click)="openForm()"><i nz-icon nzType="plus" nzTheme="outline"></i> New</button>
+    </nz-button-group>
+</div>
+
+
+<nz-drawer nzWidth="100%" [nzVisible]="showNewModal" nzTitle="New" (nzOnClose)="showNewModal = !showNewModal">
+
+<form nz-form [formGroup]="form" (ngSubmit)="submit()">
+    <aq-editor formControlName="htmlContent" [config]="editorConfig"></aq-editor>
+</form>
+
+
+{{ form.value.htmlContent }}
+
+</nz-drawer>

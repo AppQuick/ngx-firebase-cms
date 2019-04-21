@@ -1,3 +1,74 @@
-<p>
-  profile works!
-</p>
+<aq-title-bar [data]="titlebar"></aq-title-bar>
+
+<div class="container">
+    <h3>{{ (auth.user$ | async)?.displayName }}</h3>
+    <p>Email: {{ (auth.user$ | async)?.email }}</p>
+    <p>Roles: {{ (auth.user$ | async)?.roles }}</p>
+    <p>Created on: {{ (auth.user$ | async)?.createdTime.toDate() | date: 'medium' }}</p>
+    <p>Last login: {{ auth.lastLogin | date: 'medium' }}</p>
+
+    <button class="m-r-10" nz-tooltip nzTitle="Change Password" nz-button (click)="showChangePassword=true">
+        <i nz-icon type="security-scan" theme="outline"></i> Password
+    </button>
+
+    <button class="m-r-10" nz-tooltip nzTitle="Change Display Name" nz-button (click)="showDisplayName=true">
+        <i nz-icon type="font-colors" theme="outline"></i> Display Name
+    </button>
+
+    <nz-upload class="m-r-10" [nzBeforeUpload]="beforeUpload" [nzCustomRequest]="uploadProfilePic"
+        [nzShowUploadList]="false">
+        <button #uploadButton nz-tooltip nzTitle="Change Profile Image" nz-button>
+            <i nz-icon type="picture" theme="outline"></i> Profile Image
+        </button>
+    </nz-upload>
+</div>
+
+<nz-drawer nzWidth="100%" [nzVisible]="showChangePassword" nzTitle="Change Password" (nzOnClose)="showChangePassword = !showChangePassword">
+    <form nz-form [formGroup]="passwordForm" (ngSubmit)="changePassword()">
+        <nz-form-item>
+            <nz-form-control>
+                <label>Previous Password</label>
+                <input type="password" nz-input formControlName="previousPassword" placeholder="Previous Password"
+                    autocomplete="password" autofocus>
+                <nz-form-explain
+                    *ngIf="passwordForm.get('previousPassword').dirty && passwordForm.get('previousPassword').errors">
+                    Please input
+                    your previous password!</nz-form-explain>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control>
+                <label>New Password</label>
+                <input type="password" nz-input formControlName="newPassword" placeholder="New Password" autocomplete="password" autofocus>
+                <nz-form-explain
+                    *ngIf="passwordForm.get('newPassword').dirty && passwordForm.get('newPassword').errors">Please input
+                    your new
+                    password!</nz-form-explain>
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+    <div class="footer">
+        <button type="button" (click)="changePassword()" class="ant-btn ant-btn-primary">Submit </button>
+        <button type="button" (click)="showChangePassword = !showChangePassword" class="ant-btn">Cancel </button>
+    </div>
+</nz-drawer>
+
+<nz-drawer nzWidth="100%" [nzVisible]="showDisplayName" nzTitle="Change Display Name" (nzOnClose)="showDisplayName = !showDisplayName">
+    <form nz-form [formGroup]="displayNameForm" (ngSubmit)="changeDisplayName()">
+        <nz-form-item>
+            <nz-form-control>
+                <label>Your Display Name</label>
+                <input type="text" nz-input formControlName="displayName" placeholder="Please enter your display name"
+                    autocomplete="displayName" autofocus>
+                <nz-form-explain
+                    *ngIf="displayNameForm.get('displayName').dirty && displayNameForm.get('displayName').errors">Please
+                    input
+                    your Display Name!</nz-form-explain>
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+    <div class="footer">
+        <button type="button" (click)="changeDisplayName()" class="ant-btn ant-btn-primary">Submit </button>
+        <button type="button" (click)="showDisplayName = !showDisplayName" class="ant-btn">Cancel </button>
+    </div>
+</nz-drawer>
